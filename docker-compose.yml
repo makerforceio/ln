@@ -1,0 +1,35 @@
+version: "3.7"
+
+services:
+  zero:
+    image: dgraph/dgraph:latest
+    volumes:
+      - type: bind
+        source: ./dgraph-data
+        target: /dgraph
+    ports:
+      - 127.0.0.1:5080:5080
+      - 127.0.0.1:6080:6080
+    restart: on-failure
+    command: dgraph zero --my=zero:5080
+  server:
+    image: dgraph/dgraph:latest
+    volumes:
+      - type: bind
+        source: ./dgraph-data
+        target: /dgraph
+    ports:
+      - 127.0.0.1:8080:8080
+      - 127.0.0.1:9080:9080
+    restart: on-failure
+    command: dgraph alpha --my=server:7080 --lru_mb=2048 --zero=zero:5080
+  ratel:
+    image: dgraph/dgraph:latest
+    volumes:
+      - type: bind
+        source: ./dgraph-data
+        target: /dgraph
+    ports:
+      - 127.0.0.1:8000:8000
+    command: dgraph-ratel
+

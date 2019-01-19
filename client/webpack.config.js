@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
 	mode: 'development',
@@ -26,6 +27,9 @@ module.exports = {
 			},
 		],
 	},
+	plugins: [
+		new webpack.HotModuleReplacementPlugin(),
+	],
 	devtool: 'source-map',
 	devServer: {
 		contentBase: path.join(__dirname, 'dist'),

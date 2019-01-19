@@ -1,3 +1,7 @@
+*  {
+  box-sizing: border-box;
+}
+
 html {
   font-size: 16px;
 }
@@ -7,6 +11,11 @@ body {
   padding: 0px;
 
   font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
 }
 
 .container {
@@ -20,37 +29,51 @@ body {
   align-items: center;
 
   color: white;
+  overflow: hidden;
 }
-
+/*------------- Home -------------------*/
+#home {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 /*------------- Top Bar -----------------*/
 .topbar {
-  color: white;
-
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-  align-items: center;
-
-  position: absolute;
-  top: 20px;
-  left: 20px;
+  color: white
 }
 
 .topbar h1 {
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 600;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+
   margin: 0px;
-  font-size: 40px;
+  font-size: 2.5rem;
 }
 
+.topbar .back {  
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  margin: auto;
+  font-size: 2rem;
+}
+
+.topbar .back:hover {
+  font-size: 2.3rem;
+}
+
+.background-color
 /*------------- Header -----------------*/
 .container {
   text-align: center;
 }
 
 #header {
-  font-size: 4rem;
+  font-size: 3.5rem;
   width: 95%;
   max-width: 40rem;
 
@@ -106,8 +129,28 @@ body {
 
 .searchbar .fas:hover {
   font-size: 1.4rem;
-
   transition: font-size 0.2s;
+}
+
+/*------------- Graph ---------------------*/
+#graph {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  padding-top: 5em;
+}
+
+#graph h1 {
+  font-size: 2rem;
+  font-weight: 400;
+  margin: 0px;
+}
+
+#graph .searchterm {
+  font-weight: 700;
+  font-size: 2.5rem;
 }
 
 /*-------------- Media Queries -------------*/

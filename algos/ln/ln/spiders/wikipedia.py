@@ -22,7 +22,7 @@ class WikipediaSpider(scrapy.Spider):
 
     def parse(self, response):
         depth = response.meta.get("search_depth", self.max_depth)
-        if depth < 0:
+        if depth <= 0:
             return
         depth -= 1
 
@@ -47,8 +47,10 @@ class WikipediaSpider(scrapy.Spider):
             txn.discard()
 
         meta = {"search_depth": depth, "parent": uid, "weight": self.hatnote_weight}
+
+        content = response.css("div#bodyContent")[0]
         
-        hatnotes = response.css("div.hatnote").css("a::attr(href)").extract()
+        hatnotes = content.css("div.hatnote").css("a::attr(href)").extract()
 
         visited_urls = []
 
@@ -59,12 +61,14 @@ class WikipediaSpider(scrapy.Spider):
                 continue
             visited_urls.append(hatnote)
 
+            client.query
+
             if pattern.fullmatch(hatnote) is not None:
                 yield response.follow(hatnote, callback=self.parse, meta=meta)
 
         meta = {"search_depth": depth, "parent": uid, "weight": self.normal_weight}
         
-        other_links = response.css("a::attr(href)").extract()
+        other_links = content.css("a::attr(href)").extract()
 
         for link in other_links:
             if link in visited_urls:
@@ -73,3 +77,5 @@ class WikipediaSpider(scrapy.Spider):
 
             if pattern.fullmatch(link) is not None:
                 yield response.follow(link, callback=self.parse, meta=meta)
+
+        return

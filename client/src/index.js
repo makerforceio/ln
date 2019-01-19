@@ -3,12 +3,12 @@ import 'babel-polyfill';
 import AnimeClass from './animeclass';
 import Logic from './logic';
 import Grapher from './graph';
-import Masonry from 'masonry-layout';
+import ViewController from './controller'; 
 
 document.addEventListener("DOMContentLoaded", (event) => {
   console.log("Pew everything is loaded")
-  // let animeClass = new AnimeClass()
-  // animeClass.animate_intro()
+  let controller = new ViewController()
+  controller.summary('Space')
 
   let grapher = new Grapher({
     "nodes": [

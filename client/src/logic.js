@@ -2,9 +2,9 @@ import dgraph from 'dgraph-js-http';
 
 const ENDPOINT = `${window.location.protocol}//${window.location.host}:8080`;
 
-class Logic {
+export default class Logic {
 
-	#clientStub = new dgraph.DgraphClientStub(ENDPOINT);
+    #clientStub = new dgraph.DgraphClientStub(ENDPOINT);
 	#dgraphClient = new dgraph.DgraphClient(clientStub);
 
 	async query(query, vars) {
@@ -14,3 +14,4 @@ class Logic {
 
 }
 
+// vim: ts=2:ss=2:sw=2:et

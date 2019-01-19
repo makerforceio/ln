@@ -3,6 +3,7 @@ import 'babel-polyfill';
 import AnimeClass from './animeclass';
 import Logic from './logic';
 import Grapher from './graph';
+import Masonry from 'masonry-layout';
 
 document.addEventListener("DOMContentLoaded", (event) => {
   console.log("Pew everything is loaded")

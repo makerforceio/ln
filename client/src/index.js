@@ -22,7 +22,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
     ]
   })
   
-  grapher.construct_graph()
+  grapher.construct_graph().then(function(d) {
+    console.log(d)
+  })
 })
 
 window.Logic = Logic;

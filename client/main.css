@@ -49,12 +49,18 @@ body {
   text-align: center;
 }
 
-.header {
+#header {
   font-size: 4rem;
   width: 95%;
   max-width: 40rem;
 
   margin: 0px 0px 25px 0px;
+}
+
+#header .letter {
+  transform-origin: 50% 100%;
+  display: inline-block;
+  line-height: 1em;
 }
 /*-------------- Search Bar --------------*/
 .searchbar {
@@ -92,6 +98,16 @@ body {
 
 ::-webkit-input-placeholder {
   color: white;
+}
+
+.searchbar .fas {
+  transition: font-size 0.2s
+}
+
+.searchbar .fas:hover {
+  font-size: 1.4rem;
+
+  transition: font-size 0.2s;
 }
 
 /*-------------- Media Queries -------------*/

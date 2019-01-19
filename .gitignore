@@ -8,4 +8,4 @@ dgraph-data/
 
 # frontend
 client/node_modules/
-client/dist/
+client/dist/main.js

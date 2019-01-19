@@ -7,6 +7,6 @@ class Logic {
 	#clientStub = new dgraph.DgraphClientStub(ENDPOINT);
 	#dgraphClient = new dgraph.DgraphClient(clientStub);
 
-	
-
 }
+
+console.log(window);

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "webpack",
-    "serve": "webpack-dev-server --watch --hot --progress --output-public-path dist --port 8081"
+    "serve": "webpack-dev-server --progress --hot --content-base dist --port 8081"
   },
   "devDependencies": {
     "webpack": "^4.28.4",

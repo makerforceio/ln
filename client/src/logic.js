@@ -7,9 +7,16 @@ export default class Logic {
   #clientStub = new DgraphClientStub(ENDPOINT);
   #client = new DgraphClient(this.#clientStub);
 
+  constructor() {
+    this.#client.setDebugMode(process.env.NODE_ENV == 'development');
+  }
+
   async query(query, vars) {
     const res = await this.#client.newTxn().queryWithVars(query, vars);
-    console.log(res);
+    if (!res.data) {
+      throw new Error('response malformed');
+    }
+    console.log(res.data);
   }
 
   async graph(name) {
@@ -19,7 +26,7 @@ export default class Logic {
         name
         summary
       } 
-      recurse(func: uid(root)) @recurse(depth: 4) {
+      graph(func: uid(root)) @recurse(depth: 4) {
         name
         link @facets(weight) {
           name
@@ -28,6 +35,12 @@ export default class Logic {
     }`, {
       $name: name,
     });
+  }
+
+  async graphMapped(name) {
+    const graph = this.graph(name);
+
+    return;
   }
 
 }

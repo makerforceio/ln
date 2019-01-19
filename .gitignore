@@ -1,2 +1,11 @@
-dgraph-data/
+
+# Swapfiles
 *.*~
+*.swp
+
+# dgraph stuff
+dgraph-data/
+
+# frontend
+client/node_modules/
+client/dist/main.js

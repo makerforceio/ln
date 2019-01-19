@@ -1,0 +1,162 @@
+*  {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  margin: 0px;
+  padding: 0px;
+
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+}
+
+.container {
+  background-color: black;
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+  overflow: hidden;
+}
+/*------------- Home -------------------*/
+#home {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*------------- Top Bar -----------------*/
+.topbar {
+  color: white
+}
+
+.topbar h1 {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+
+  margin: 0px;
+  font-size: 2.5rem;
+}
+
+.topbar .back {  
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  margin: auto;
+  font-size: 2rem;
+}
+
+.topbar .back:hover {
+  font-size: 2.3rem;
+}
+
+.background-color
+/*------------- Header -----------------*/
+.container {
+  text-align: center;
+}
+
+#header {
+  font-size: 3.5rem;
+  width: 95%;
+  max-width: 40rem;
+
+  margin: 0px 0px 25px 0px;
+}
+
+#header .letter {
+  transform-origin: 50% 100%;
+  display: inline-block;
+  line-height: 1em;
+}
+/*-------------- Search Bar --------------*/
+.searchbar {
+  background-color: transparent;
+  width: 80%;
+  max-width: 40rem;
+  height: 30px;
+  color: white;
+
+  padding: 0.5em 1em;
+  font-size: 1.2rem;
+  
+  border: 2px solid;
+  border-color: white;
+  border-radius: 1rem;
+
+  -webkit-appearance: none;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.searchbar input {
+  margin: auto 0px;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  color: inherit;
+
+  width: 100%;
+  height: 100%;
+}
+
+::-webkit-input-placeholder {
+  color: white;
+}
+
+.searchbar .fas {
+  transition: font-size 0.2s
+}
+
+.searchbar .fas:hover {
+  font-size: 1.4rem;
+  transition: font-size 0.2s;
+}
+
+/*------------- Graph ---------------------*/
+#graph {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  padding-top: 5em;
+}
+
+#graph h1 {
+  font-size: 2rem;
+  font-weight: 400;
+  margin: 0px;
+}
+
+#graph .searchterm {
+  font-weight: 700;
+  font-size: 2.5rem;
+}
+
+/*-------------- Media Queries -------------*/
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  html {
+    font-size: 13px;
+  }
+}

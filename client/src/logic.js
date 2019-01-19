@@ -1,14 +1,14 @@
-import dgraph from 'dgraph-js-http';
+import { DgraphClientStub, DgraphClient } from 'dgraph-js-http';
 
 const ENDPOINT = `${window.location.protocol}//${window.location.hostname}:8080`;
 
 export default class Logic {
 
-  #clientStub = new dgraph.DgraphClientStub(ENDPOINT);
-  #dgraphClient = new dgraph.DgraphClient(clientStub);
+  #clientStub = new DgraphClientStub(ENDPOINT);
+  #client = new DgraphClient(this.#clientStub);
 
   async query(query, vars) {
-    const res = await dgraphClient.newTxn().queryWithVars(query, vars);
+    const res = await this.#client.newTxn().queryWithVars(query, vars);
     console.log(res);
   }
 

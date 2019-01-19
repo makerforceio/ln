@@ -1,3 +1,5 @@
 # dgraph stuff
 dgraph-data/
+# Swapfiles
 *.*~
+*.swp

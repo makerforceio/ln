@@ -16,4 +16,4 @@ client/dist/main.js.map
 *.DS_Store
 
 # algos
-algos/ln/ln/__pycache__/
+__pycache__/

@@ -1,3 +1,5 @@
+import anime from 'animejs';
+
 export default class AnimeClass {
   constructor(anime) {
     this.anime = anime

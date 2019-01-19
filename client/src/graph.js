@@ -46,17 +46,17 @@ export default class Grapher {
 
       let lables = node.append('text')
           .text(function(d) {
-            return d.id
+            return d.title
           })
           .attr('text-anchor', 'middle')
-          .attr('baseline-shift', 30)
+          .attr('transform', 'translate(0, -30)')
           .attr('fill', function(d) {return color('White')})
           .attr('font-size', 20)
           .attr('font-family', 'Open Sans')
           .attr('font-weight', 700)
 
       node.append('title')
-          .text(function(d) { return d.id })
+          .text(function(d) { return d.title })
 
       simulation
           .nodes(this.data.nodes)
@@ -101,3 +101,5 @@ export default class Grapher {
     })
   }  
 }
+
+// vim: ts=2:ss=2:sw=2:et

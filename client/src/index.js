@@ -11,14 +11,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
   let grapher = new Grapher({
     "nodes": [
-      {"id": "Cryptocurrency"},
-      {"id": "Stuff"},
-      {"id": "More Stuff"},
+      {"id": "1", "title": "Cryptocurrency"},
+      {"id": "2", "title": "Stuff"},
+      {"id": "3", "title": "More Stuff"},
     ],
     "links": [
-      {"source": "Cryptocurrency", "target": "Stuff", "value": "1"},
-      {"source": "Cryptocurrency", "target": "More Stuff", "value": "5"},
-      {"source": "More Stuff", "target": "Stuff", "value": "3"}
+      {"source": "1", "target": "2", "value": "1"},
+      {"source": "1", "target": "3", "value": "5"},
+      {"source": "3", "target": "2", "value": "3"}
     ]
   })
   

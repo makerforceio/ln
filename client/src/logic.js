@@ -27,9 +27,13 @@ export default class Logic {
         summary
       } 
       graph(func: uid(root)) @recurse(depth: 4) {
+        uid
         name
+        title
         link @facets(weight) {
+          uid
           name
+          title
         }
       }
     }`, {
@@ -38,9 +42,16 @@ export default class Logic {
   }
 
   async graphMapped(name) {
-    const graph = this.graph(name);
-
-    return;
+    const { graph } = await this.graph(name);
+    const recurse = (a) => {
+      return a.flatMap((o) => {
+        if (!o.link) {
+          return [o.uid];
+        }
+        return recurse(o.link);
+      });
+    };
+    return recurse(graph);
   }
 
 }

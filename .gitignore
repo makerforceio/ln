@@ -9,6 +9,7 @@ dgraph-data/
 # frontend
 client/node_modules/
 client/dist/main.js
+client/dist/main.js.map
 
 # algos
 algos/ln/ln/__pycache__/

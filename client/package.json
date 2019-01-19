@@ -1,0 +1,16 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+	"build": "webpack"
+  },
+  "devDependencies": {
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1"
+  },
+  "dependencies": {
+    "animejs": "^3.0.1",
+    "dgraph-js-http": "^0.1.0"
+  }
+}

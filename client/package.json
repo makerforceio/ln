@@ -20,6 +20,7 @@
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.2.3",
     "animejs": "^3.0.1",
+    "d3": "^5.7.0",
     "dgraph-js-http": "^0.1.0",
     "webpack-dev-server": "^3.1.14"
   }

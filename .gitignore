@@ -2,6 +2,7 @@
 # Swapfiles
 *.*~
 *.swp
+*.log
 
 # dgraph stuff
 dgraph-data/
@@ -9,3 +10,6 @@ dgraph-data/
 # frontend
 client/node_modules/
 client/dist/main.js
+
+# Apple
+.DS_Store

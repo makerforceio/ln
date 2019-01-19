@@ -12,6 +12,24 @@ export default class Logic {
     console.log(res);
   }
 
+  async graph(name) {
+    return this.query(`query all($name: string) {
+      var(func: eq(name, $name)) {
+        root as uid
+        name
+        summary
+      } 
+      recurse(func: uid(root)) @recurse(depth: 4) {
+        name
+        link @facets(weight) {
+          name
+        }
+      }
+    }`, {
+      $name: name,
+    });
+  }
+
 }
 
 // vim: ts=2:ss=2:sw=2:et

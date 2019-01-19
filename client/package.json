@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "webpack build",
-    "serve": "webpack-dev-server --watch --progress --port 8081"
+    "build": "webpack",
+    "serve": "webpack-dev-server --watch --hot --progress --output-public-path dist --port 8081"
   },
   "devDependencies": {
     "webpack": "^4.28.4",

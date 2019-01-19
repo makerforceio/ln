@@ -2,6 +2,7 @@
 # Swapfiles
 *.*~
 *.swp
+*.log
 
 # dgraph stuff
 dgraph-data/
@@ -9,6 +10,10 @@ dgraph-data/
 # frontend
 client/node_modules/
 client/dist/main.js
+client/dist/main.js.map
+
+# Apple
+*.DS_Store
 
 # algos
 algos/ln/ln/__pycache__/

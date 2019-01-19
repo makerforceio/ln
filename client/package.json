@@ -21,6 +21,10 @@
   },
   "dependencies": {
     "animejs": "^3.0.1",
+    "d3": "^5.7.0",
+    "dgraph-js-http": "^0.1.0",
+    "webpack-dev-server": "^3.1.14",
+    "babel-polyfill": "^6.26.0",
     "dgraph-js-http": "^0.1.0"
   }
 }

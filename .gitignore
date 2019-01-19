@@ -17,3 +17,4 @@ client/dist/main.js.map
 
 # algos
 __pycache__/
+httpcache/

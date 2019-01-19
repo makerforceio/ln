@@ -5,6 +5,8 @@ import pydgraph as dg
 
 import re
 
+import json
+
 class WikipediaSpider(scrapy.Spider):
     name = 'wikipedia'
 
@@ -26,28 +28,18 @@ class WikipediaSpider(scrapy.Spider):
             return
         depth -= 1
 
-        page_name = response.url.split("/")[-1]
+        uid = response.meta.get("uid", None)
+        if uid is None:
+            txn = self.client.txn()
+            try:
+                page_name = response.url.split("/")[-1]
 
-        obj = {
-            "uid": "_:obj",
-            "name": page_name
-        }
+                uid = self.get_node(txn, page_name)
+                txn.commit()
+            finally:
+                txn.discard()
 
-        parent = response.meta.get("parent")
-
-        txn = self.client.txn()
-        try:
-            uid = txn.mutate(set_obj=obj).uids['obj']
-            if parent is not None:
-                weight = response.meta.get('weight')
-                txn.mutate(set_nquads="<{}> <link> <{}> (weight={}) .".format(parent, uid, weight))
-                # txn.mutate(set_nquads="<{}> <link@reverse> <{}> (weight={}) .".format(uid, parent, weight))
-        finally:
-            txn.commit()
-            txn.discard()
-
-        meta = {"search_depth": depth, "parent": uid, "weight": self.hatnote_weight}
-
+        
         content = response.css("div#bodyContent")[0]
         
         hatnotes = content.css("div.hatnote").css("a::attr(href)").extract()
@@ -55,27 +47,59 @@ class WikipediaSpider(scrapy.Spider):
         visited_urls = []
 
         pattern = re.compile("\/wiki/(?!(.*:.*)).*")
-
+    
         for hatnote in hatnotes:
-            if hatnote in visited_urls:
-                continue
-            visited_urls.append(hatnote)
-
-            client.query
-
-            if pattern.fullmatch(hatnote) is not None:
+            meta = self.get_meta(hatnote, visited_urls, pattern, uid, depth, self.hatnote_weight)
+            if meta is not None:
                 yield response.follow(hatnote, callback=self.parse, meta=meta)
 
-        meta = {"search_depth": depth, "parent": uid, "weight": self.normal_weight}
-        
         other_links = content.css("a::attr(href)").extract()
 
         for link in other_links:
-            if link in visited_urls:
-                continue
-            visited_urls.append(link)
-
-            if pattern.fullmatch(link) is not None:
+            meta = self.get_meta(link, visited_urls, pattern, uid, depth, self.hatnote_weight)
+            if meta is not None:
                 yield response.follow(link, callback=self.parse, meta=meta)
-
+            
         return
+
+    def get_node(self, txn, page_name):
+        uid = txn.query(('{find(func: eq(name, \"%s\")){uid}}') % page_name)
+        uid = json.loads(uid.json)['find']
+        if len(uid) != 0:
+            uid = uid[0]['uid']
+        else:
+            obj = {
+                "uid": "_:obj",
+                "name": page_name
+            }
+            
+            uid = txn.mutate(set_obj=obj).uids['obj']
+
+        return uid
+
+    def link(self, txn, parent, child, weight):
+        txn.mutate(set_nquads="<{}> <link> <{}> (weight={}) .".format(parent, child, weight))
+        # txn.mutate(set_nquads="<{}> <link@reverse> <{}> (weight={}) .".format(uid, parent, weight))
+
+    def get_meta(self, ref, visited_urls, pattern, uid, depth, weight):
+        if ref in visited_urls:
+            return None
+        visited_urls.append(ref)
+
+        if pattern.fullmatch(ref) is not None:
+            child_name = ref.split("/")[-1]
+            
+            txn = self.client.txn()
+            child_uid = None
+            try:
+                child_uid = self.get_node(txn, child_name)
+
+                self.link(txn, uid, child_uid, weight)
+                txn.commit()
+            finally:
+                txn.discard()
+
+            meta = {"search_depth": depth, "uid": child_uid, "weight": weight}
+            return meta
+
+        return None

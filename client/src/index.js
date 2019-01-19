@@ -1,3 +1,5 @@
+import 'babel-polyfill';
+
 import dgraph from 'dgraph-js-http';
 import anime from 'animejs';
 import AnimeClass from './animeclass';

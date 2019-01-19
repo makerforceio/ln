@@ -36,3 +36,5 @@ export default class AnimeClass {
   }
 
 }
+
+// vim: ts=2:ss=2:sw=2:et

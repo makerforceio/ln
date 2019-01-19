@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = {
+	mode: 'development',
 	module: {
 		rules: [
 			{
@@ -25,6 +26,7 @@ module.exports = {
 			},
 		],
 	},
+	devtool: 'source-map',
 	devServer: {
 		contentBase: path.join(__dirname, 'dist'),
 		hot: true,

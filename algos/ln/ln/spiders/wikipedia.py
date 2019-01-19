@@ -35,6 +35,9 @@ class WikipediaSpider(scrapy.Spider):
                 page_name = response.url.split("/")[-1]
 
                 uid = self.get_node(txn, page_name)
+
+                title = response.css("h1#firstHeading::text")[0].extract()
+                txn.mutate(set_nquads="<{}> <title@en> \"{}\" .".format(uid, title))
                 txn.commit()
             finally:
                 txn.discard()

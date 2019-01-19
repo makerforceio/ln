@@ -23,7 +23,7 @@
     "animejs": "^3.0.1",
     "babel-polyfill": "^6.26.0",
     "d3": "^5.7.0",
-    "dgraph-js-http": "^0.1.0",
+    "dgraph-js-http": "git://github.com/MichelDiz/dgraph-js-http#9a55afd57a6b3d813b6e355f0790785722ff6004",
     "webpack-dev-server": "^3.1.14"
   }
 }

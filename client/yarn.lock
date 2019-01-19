@@ -1959,10 +1959,9 @@ detect-node@^2.0.4:
   resolved "https://registry.yarnpkg.com/detect-node/-/detect-node-2.0.4.tgz#014ee8f8f669c5c58023da64b8179c083a28c46c"
   integrity sha512-ZIzRpLJrOj7jjP2miAtgqIfmzbxa4ZOr5jJc601zklsfEx9oTzmmj2nVpIPRpNlRTIh8lc1kyViIY7BWSGNmKw==
 
-dgraph-js-http@^0.1.0:
+"dgraph-js-http@git://github.com/MichelDiz/dgraph-js-http#9a55afd57a6b3d813b6e355f0790785722ff6004":
   version "0.1.0"
-  resolved "https://registry.yarnpkg.com/dgraph-js-http/-/dgraph-js-http-0.1.0.tgz#2561d596da688e5d390df940f7f2a31b8b1fb9df"
-  integrity sha512-97tCcMBtm8JB9dfIFzxVAdw9MjQCYYUKmQCU3jSo2CMfPEavQ0+0nE2LNlaZ714ShDykXDMBFJ+E9/miOxCflA==
+  resolved "git://github.com/MichelDiz/dgraph-js-http#9a55afd57a6b3d813b6e355f0790785722ff6004"
   dependencies:
     isomorphic-fetch "^2.2.1"
 

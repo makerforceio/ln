@@ -1,6 +1,6 @@
 import dgraph from 'dgraph-js-http';
 
-const ENDPOINT = `${window.location.protocol}//${window.location.host}:8080`;
+const ENDPOINT = `${window.location.protocol}//${window.location.hostname}:8080`;
 
 export default class Logic {
 

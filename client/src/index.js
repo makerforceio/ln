@@ -1,14 +1,12 @@
 import 'babel-polyfill';
 
-import dgraph from 'dgraph-js-http';
-import anime from 'animejs';
 import AnimeClass from './animeclass';
 import Logic from './logic';
 import Grapher from './graph';
 
 document.addEventListener("DOMContentLoaded", (event) => {
   console.log("Pew everything is loaded")
-  // let animeClass = new AnimeClass(anime)
+  // let animeClass = new AnimeClass()
   // animeClass.animate_intro()
 
   grapher = new Grapher({

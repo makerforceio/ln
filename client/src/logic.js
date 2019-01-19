@@ -8,7 +8,7 @@ export default class Logic {
   #client = new DgraphClient(this.#clientStub);
 
   constructor() {
-    this.#client.setDebugMode(process.env.NODE_ENV == 'development');
+    //this.#client.setDebugMode(process.env.NODE_ENV == 'development');
   }
 
   async query(query, vars) {
@@ -16,7 +16,7 @@ export default class Logic {
     if (!res.data) {
       throw new Error('response malformed');
     }
-    console.log(res.data);
+    return res.data;
   }
 
   async graph(name) {
@@ -26,15 +26,11 @@ export default class Logic {
         name
         summary
       } 
-      graph(func: uid(root)) @recurse(depth: 4) {
+      graph(func: uid(root)) @recurse(depth: 2) {
         uid
         name
         title
-        link @facets(weight) {
-          uid
-          name
-          title
-        }
+        link @facets(weight)
       }
     }`, {
       $name: name,
@@ -43,15 +39,18 @@ export default class Logic {
 
   async graphMapped(name) {
     const { graph } = await this.graph(name);
-    const recurse = (a) => {
+    let edges = [];
+    const recurse = (a, up) => {
       return a.flatMap((o) => {
-        if (!o.link) {
-          return [o.uid];
-        }
-        return recurse(o.link);
+        if (!o.uid) return [];
+        if (up) edges.push({ source: up, target: o.uid, value: '1' });
+        if (!o.link) return [{ id: o.uid, title: o.title }];
+        return [{ id: o.uid, title: o.title}, ...recurse(o.link, o.uid)];
       });
     };
-    return recurse(graph);
+    const nodes = recurse(graph);
+    console.log(nodes, edges);
+    return { nodes: nodes, links: edges };
   }
 
 }

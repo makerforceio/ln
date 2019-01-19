@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   // let animeClass = new AnimeClass(anime)
   // animeClass.animate_intro()
 
-  grapher = new Grapher({
+  let grapher = new Grapher({
     "nodes": [
       {"id": "Cryptocurrency"},
       {"id": "Stuff"},

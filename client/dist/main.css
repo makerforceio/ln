@@ -163,6 +163,10 @@ h1 {
   font-size: 2.5rem;
 }
 
+#graph {
+  width: 100%;
+  height: 100%;
+}
 /*-------------- Media Queries -------------*/
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */

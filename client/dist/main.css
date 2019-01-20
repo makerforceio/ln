@@ -244,6 +244,32 @@ h1 {
   color: white;
   background-color: black;
   transition: color 0.2s, background-color 0.2s;
+}
+
+/*--------------- Suggestions --------------*/
+
+.suggest:not(:empty) {
+  height: 24.5em;
+  list-style: none;
+  padding: 0.25em 0;
+  margin: 0;
+  text-align: left;
+  width: calc(90% - 2rem);
+  max-width: 38rem;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  border: 2px solid #fff;
+  border-top: none;
+}
+
+.suggest li {
+  font-size: 1.2em;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+.suggest li:hover {
+  background-color: #444;
+}
 
 /*-------------- Media Queries -------------*/
 @media only screen and (max-width: 768px) {

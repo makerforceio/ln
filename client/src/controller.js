@@ -13,6 +13,18 @@ export default class ViewController {
   async home() {
     this.switchviewelement('home')
   }
+  
+  async updateTopics(query) {
+    const res = await this.#logic.search(query);
+    const results = res[1];
+    const links = res[3].map(l => l.split('/').pop());
+
+    const html = results.map((r, i) => `
+      <li onclick="window.controller.graph('${links[i]}')">${r}</li>
+    `).join('');
+
+    document.querySelector('#suggest').innerHTML = html;
+  }
 
   async graph(searchterm) {
     const stuff = await this.#logic.graphMapped(searchterm);
@@ -27,7 +39,6 @@ export default class ViewController {
 
   async summary(topic) {
     const cards = await this.#logic.cards(topic.name);
-    console.log(cards);
 
     const html = cards.map(c => `
       <div class="card"

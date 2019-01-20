@@ -23,8 +23,9 @@
       <h1 id="header">Learn anything now.</h1>
       <form class="searchbar" onsubmit="window.controller.graph(this.query.value); return false">
         <span class="fas fa-search"></span> 
-        <input placeholder="Enter a subject..." name="query" />
+        <input placeholder="Enter a subject..." name="query" oninput="window.controller.updateTopics(this.value)" />
       </form>
+      <ul id="suggest"></ul>
     </div>
 
     <div class="container" id="graphview">

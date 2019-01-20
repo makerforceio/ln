@@ -29,7 +29,17 @@ export default class ViewController {
     const cards = await this.#logic.cards(topic.name);
     console.log(cards);
 
+    const html = cards.map(c => `
+      <div class="card card-2w">
+        <h1>${c.title}</h1>
+        <!-- <span class="badge">wikipedia.com</span> -->
+        <!-- <span class="badge">summary</span> -->
+        <p id="cardtext">${c.content}</p>
+      </div>
+    `).join('');
+
     document.querySelector('#summarytitle').innerText = topic.title;
+    document.querySelector('#summarycards').innerHTML = html;
     this.switchviewelement('summaryview')
   }
 

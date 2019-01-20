@@ -7,7 +7,6 @@ export default class ViewController {
   
   home() {
     this.switchviewelement('home')
-    this.animeclass.animate_intro()
   }
 
   graph(searchterm) {
@@ -20,10 +19,25 @@ export default class ViewController {
     this.switchviewelement('summaryview')
   }
 
-  switchviewelement(id) {
+  switchviewelement(id) { 
+    let id1, id2 = ''
     document.querySelectorAll('.container').forEach((elem) => {
-      (elem.id == id) ? (elem.style.display = 'flex') : (elem.style.display = 'none')
+      if(elem.id == id) {
+        id1 = elem.id
+      } else if (elem.style.display == 'flex') {
+        id2 = elem.id
+      } else {
+        // Do nth
+      }
     })
+
+    console.log(id1)
+    console.log(id2)
+    
+    if(id2 === '')
+      this.animeclass.animate_in(id1)
+    else 
+      this.animeclass.animate_between(id1, id2)
   }
 
   sanitizeHTML(str) {

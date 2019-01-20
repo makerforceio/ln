@@ -8,7 +8,16 @@ import ViewController from './controller';
 document.addEventListener("DOMContentLoaded", (event) => {
   console.log("Pew everything is loaded")
   let controller = new ViewController()
-  controller.summary('Space')
+  controller.home()
+
+  setTimeout(function() {
+      controller.graph('Space')
+  }, 3000)
+
+  setTimeout(function() {
+      console.log('summary')
+      controller.summary('Space')
+  }, 6000)
 
   let grapher = new Grapher({
     "nodes": [

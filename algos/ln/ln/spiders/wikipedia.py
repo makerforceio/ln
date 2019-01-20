@@ -13,7 +13,7 @@ class WikipediaSpider(scrapy.Spider):
         self.normal_weight = 1
         self.hatnote_weight = 5
 
-        self.max_depth = 2
+        self.max_depth = 10
 
     def parse(self, response):
         depth = response.meta.get("search_depth", self.max_depth)

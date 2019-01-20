@@ -116,6 +116,16 @@ export default class AnimeClass {
   }
   
   animate_out_summaryview() {
+    anime({
+      targets: '.gridview .card',
+      scale: [1, 0],
+      duration: 1000,
+      elasticity: 300,
+      delay: function(el, i) {
+        return 60 * (i+1)
+      }
+    })
+
     this.create_anime_fadeout('#summaryview h1')
     this.create_anime_fadeout('#summarytitle')
     // this.create_anime_fadeout('.back')

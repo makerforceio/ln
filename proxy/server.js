@@ -15,9 +15,12 @@ app.get('/cards', async (req, res) => {
 	const images = doc.images().map(p => (
 		{ type: 'image', image: p.url() }
 	)).slice(0, 1);
-	const paragraphs = doc.sections(0).paragraphs().map(p => (
-		{ type: 'paragraph', title: 'Summary', content: p.text() }
-	)).filter(p => p.content.length > 0);
+	const paragraphs = doc.sections(0).paragraphs()
+		.map(p => p.text())
+		.filter(p => p.length > 0)
+		.map((p, i) => (
+		{ type: 'paragraph', title: i ? '' : 'Summary', content: p }
+	));
 	const links = [
 		{ type: 'link', title: 'Wikipedia', url: 'https://en.wikipedia.org/wiki/' + req.query.name },
 	];

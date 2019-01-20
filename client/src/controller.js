@@ -24,14 +24,15 @@ export default class ViewController {
     const links = res[3].map(l => l.split('/').pop());
 
     const html = results.map((r, i) => `
-      <li onclick="window.controller.graph('${links[i]}')">${r}</li>
+      <li onclick="window.controller.graph('${links[i]}', '${r}')">${r}</li>
     `).join('');
 
     document.querySelector('#suggest').innerHTML = html;
   }
 
-  async graph(searchterm) {
-    const stuff = await this.#logic.graphMapped(searchterm);
+  async graph(link, searchterm) {
+    const stuff = await this.#logic.graphMapped(link);
+    document.querySelector('svg').innerHTML = '';
     const grapher = new Grapher(stuff);
     grapher.construct_graph().then((topic) => {
       this.summary(topic);
@@ -53,14 +54,14 @@ export default class ViewController {
             ``;
           } else if (c.type == 'paragraph') {
             `
-              <h1>${c.title}</h1>
+              ${c.title ? `<h1>${c.title}</h1>` : ''}
               <!-- <span class="badge">wikipedia.com</span> -->
               <!-- <span class="badge">summary</span> -->
               <p id="cardtext">${c.content}</p>
             `;
           } else if (c.type == 'link') {
             `
-
+              <p id="cardtext">Source: <a href="${c.link}">${c.title}</a></p>
             `;
           } else {
             ``;

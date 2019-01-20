@@ -7,6 +7,9 @@
 # dgraph stuff
 dgraph-data/
 
+# proxy
+proxy/node_modules/
+
 # frontend
 client/node_modules/
 client/dist/main.js

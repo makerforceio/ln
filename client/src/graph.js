@@ -43,8 +43,8 @@ export default class Grapher {
               if(this.data.links[elem].source == d.id)
                 weight += 1
             }
-            console.log(weight)
-            return Math.max(20, weight)
+            console.log(Math.exp(weight/this.data.links.length))
+            return (Math.exp(weight/this.data.links.length))*10
           }.bind(this))
           .attr('fill', function(d) { return color('White') })
           .call(d3.drag()
@@ -61,7 +61,7 @@ export default class Grapher {
           .attr('text-anchor', 'middle')
           .attr('transform', 'translate(0, -30)')
           .attr('fill', function(d) {return color('White')})
-          .attr('font-size', 20)
+          .attr('font-size', 15)
           .attr('font-family', 'Open Sans')
           .attr('font-weight', 700)
           .attr('stroke', color('Black'))

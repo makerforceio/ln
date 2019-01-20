@@ -1,6 +1,21 @@
 import anime from 'animejs';
 
 export default class AnimeClass {
+  constructor() {     
+    document.querySelector('#home').style.display = 'flex'
+      // Wrapping letters in span
+      let header = document.querySelector('#header').innerHTML
+      let span_header = ''
+     
+    header.split('').forEach((c) => {
+      c = (c === ' ') ? '&nbsp' : c
+      span_header += `<span class="letter">${c}</span>`  
+    })
+    document.querySelector('#header').innerHTML = span_header
+  }
+
+
+
   animate_between(id1, id2) {
     this.animate_out(id2)
     setTimeout(function() {
@@ -43,19 +58,7 @@ export default class AnimeClass {
     }
   }
 
-  animate_in_home() {
-    document.querySelector('#home').style.display = 'flex'
-    // Wrapping letters in span
-    let header = document.querySelector('#header').innerHTML
-    let span_header = ''
-
-    header.split('').forEach((c) => {
-      c = (c === ' ') ? '&nbsp' : c
-      span_header += `<span class="letter">${c}</span>`  
-    })
-
-    document.querySelector('#header').innerHTML = span_header
-    
+  animate_in_home() { 
     // Animation for header
     anime({
         targets: '#header .letter',
@@ -68,11 +71,13 @@ export default class AnimeClass {
     })
     
     this.create_anime_fadein('.searchbar')
+    this.create_anime_fadein('.suggest')
   }
 
   animate_out_home() {
     this.create_anime_fadeout('#header')
     this.create_anime_fadeout('.searchbar')
+    this.create_anime_fadeout('.suggest')
 
     setTimeout(function() {document.querySelector('#home').style.display = 'none'}, 1000)
   }

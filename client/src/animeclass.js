@@ -60,6 +60,7 @@ export default class AnimeClass {
 
   animate_in_home() { 
     // Animation for header
+    document.querySelector('#home').style.display = 'flex'
     anime({
         targets: '#header .letter',
         scale: [0, 1],

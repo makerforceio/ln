@@ -27,30 +27,29 @@ class WikipediaSpider(scrapy.Spider):
             "title": response.css("h1#firstHeading::text")[0].extract()
         }
 
+        if response.meta.get("parent") is not None:
+            yield {
+                "name" : name,
+                "parent": response.meta["parent"],
+                "weight": response.meta["weight"]
+            }
+        
         
         content = response.css("div#bodyContent")[0]
         
         hatnotes = content.css("div.hatnote").css("a::attr(href)").extract()
 
         pattern = re.compile("\/wiki/(?!(.*:.*)).*")
-    
+
+        meta = {"search_depth": depth, "weight": self.hatnote_weight, "parent": name}
         for hatnote in hatnotes:
             if pattern.fullmatch(hatnote):
-                yield {
-                    "name": hatnote.split("/")[-1],
-                    "parent": name,
-                    "weight": self.hatnote_weight
-                }
-                yield response.follow(hatnote, callback=self.parse, meta={"search_depth": depth, "weight": self.normal_weight})
+                yield response.follow(hatnote, callback=self.parse, meta=meta)
 
         other_links = content.css("a::attr(href)").extract()
 
+        meta = {"search_depth": depth, "weight": self.normal_weight, "parent": name}
         for link in other_links:
             if pattern.fullmatch(link):
-                yield {
-                    "name": link.split("/")[-1],
-                    "parent": name,
-                    "weight": self.normal_weight
-                }
-                yield response.follow(link, callback=self.parse, meta={"search_depth": depth, "weight": self.normal_weight})
+                yield response.follow(link, callback=self.parse, meta=meta)
             

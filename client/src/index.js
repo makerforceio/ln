@@ -8,7 +8,7 @@ import ViewController from './controller';
 document.addEventListener("DOMContentLoaded", async (event) => {
   console.log("Pew everything is loaded")
   let controller = new ViewController()
-  controller.summary('Space')
+  controller.graph('Space')
 
   const logic = new Logic();
   window.logic = logic;

@@ -2,13 +2,15 @@ import { DgraphClientStub, DgraphClient } from 'dgraph-js-http';
 
 const ENDPOINT = `${window.location.protocol}//${window.location.hostname}:8080`;
 
+const SEARCH_URL = `https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=`
+
 export default class Logic {
 
   #clientStub = new DgraphClientStub(ENDPOINT);
   #client = new DgraphClient(this.#clientStub);
 
   constructor() {
-    //this.#client.setDebugMode(process.env.NODE_ENV == 'development');
+    this.#client.setDebugMode(process.env.NODE_ENV == 'development');
   }
 
   async query(query, vars) {
@@ -17,6 +19,9 @@ export default class Logic {
       throw new Error('response malformed');
     }
     return res.data;
+  }
+
+  async search(query) {
   }
 
   async graph(name) {
@@ -29,7 +34,7 @@ export default class Logic {
       graph(func: uid(root)) @recurse(depth: 2) {
         uid
         name
-        title
+        title@en
         link @facets(weight)
       }
     }`, {
@@ -41,11 +46,14 @@ export default class Logic {
     const { graph } = await this.graph(name);
     let edges = [];
     const recurse = (a, up) => {
+      if (!a) return [];
       return a.flatMap((o) => {
         if (!o.uid) return [];
         if (up) edges.push({ source: up, target: o.uid, value: '1' });
-        if (!o.link) return [{ id: o.uid, title: o.title }];
-        return [{ id: o.uid, title: o.title}, ...recurse(o.link, o.uid)];
+        return [
+          { id: o.uid, title: o['title@en']},
+          ...recurse(o.link, o.uid),
+        ];
       });
     };
     const nodes = recurse(graph);

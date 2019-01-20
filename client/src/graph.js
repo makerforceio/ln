@@ -35,7 +35,17 @@ export default class Grapher {
         .enter().append('g')
 
       let circles = node.append('circle')
-          .attr('r', 20)
+          .attr('r', function(d) {
+            let weight = 0
+            console.log(d.id)
+            for (let elem in this.data.links) {
+              // console.log(this.data.links[elem])
+              if(this.data.links[elem].source == d.id)
+                weight += 1
+            }
+            console.log(weight)
+            return Math.max(20, weight)
+          }.bind(this))
           .attr('fill', function(d) { return color('White') })
           .call(d3.drag()
               .on('start', dragstarted)
@@ -54,6 +64,7 @@ export default class Grapher {
           .attr('font-size', 20)
           .attr('font-family', 'Open Sans')
           .attr('font-weight', 700)
+          .attr('stroke', color('Black'))
 
       node.append('title')
           .text(function(d) { return d.title })

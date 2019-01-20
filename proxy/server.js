@@ -12,9 +12,9 @@ app.get('/search', async (req, res) => {
 
 app.get('/cards', async (req, res) => {
 	const doc = await wtf.fetch(req.query.name, 'en');
-	const paragraphs = [0, 1, 2].map(i => 
-		doc.paragraphs(i).text()
-	);
+	const paragraphs = [0, 1, 2].map(i => (
+		{ title: 'Summary', content: doc.paragraphs(i).text() }
+	));
 	const link = [];
 	res.json([
 		...paragraphs,

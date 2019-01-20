@@ -90,4 +90,4 @@ HTTPCACHE_ENABLED = True
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 # Custom scheduler
-SCHEDULER = 'ln.schedulers.Scheduler'
+SCHEDULER = 'ln.schedulers.ProximityScheduler'

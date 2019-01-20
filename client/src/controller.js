@@ -17,18 +17,19 @@ export default class ViewController {
   async graph(searchterm) {
     const stuff = await this.#logic.graphMapped(searchterm);
     const grapher = new Grapher(stuff);
-    grapher.construct_graph().then((name) => {
-      this.summary(name);
+    grapher.construct_graph().then((topic) => {
+      this.summary(topic);
     });
 
-    document.querySelector('#searchterm').innerHTML = this.sanitizeHTML(searchterm)
+    document.querySelector('#searchterm').innerText = searchterm;
     this.switchviewelement('graphview')
   }
 
-  async summary(name) {
-    const cards = await this.#logic.cards(name);
+  async summary(topic) {
+    const cards = await this.#logic.cards(topic.name);
+    console.log(cards);
 
-    document.querySelector('#summarytitle').innerHTML = this.sanitizeHTML(searchterm)
+    document.querySelector('#summarytitle').innerText = topic.title;
     this.switchviewelement('summaryview')
   }
 

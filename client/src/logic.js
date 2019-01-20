@@ -36,7 +36,7 @@ export default class Logic {
         name
         summary
       } 
-      graph(func: uid(root)) @recurse(depth: 2) {
+      graph(func: uid(root)) @recurse(depth: 3) {
         uid
         name
         title@en

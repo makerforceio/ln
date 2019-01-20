@@ -46,7 +46,7 @@ export default class ViewController {
 
     const html = cards.map(c => `
       <div class="card"
-        ${c.type == 'image' ? `style="background: url('${c.image}'); background-size: cover;"` : ''}
+        ${c.type == 'image' ? `style="background: #fff url('${c.image}'); background-size: cover;"` : ''}
         >
         ${do {
           if (c.type == 'image') {

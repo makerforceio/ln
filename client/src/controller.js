@@ -15,6 +15,10 @@ export default class ViewController {
   }
   
   async updateTopics(query) {
+    if (query == '') {
+      document.querySelector('#suggest').innerHTML = '';
+      return;
+    }
     const res = await this.#logic.search(query);
     const results = res[1];
     const links = res[3].map(l => l.split('/').pop());

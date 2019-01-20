@@ -248,6 +248,12 @@ h1 {
 
 /*--------------- Suggestions --------------*/
 
+.suggest {
+  height: 0;
+  transition: 0.5s height;
+  overflow: hidden;
+}
+
 .suggest:not(:empty) {
   height: 24.5em;
   list-style: none;
@@ -264,7 +270,7 @@ h1 {
 
 .suggest li {
   font-size: 1.2em;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 2.75rem;
   cursor: pointer;
 }
 .suggest li:hover {

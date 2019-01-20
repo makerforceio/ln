@@ -1,8 +1,6 @@
 import 'babel-polyfill';
 
-import AnimeClass from './animeclass';
 import Logic from './logic';
-import Grapher from './graph';
 import ViewController from './controller'; 
 
 document.addEventListener("DOMContentLoaded", async (event) => {

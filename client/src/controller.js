@@ -1,4 +1,5 @@
 import AnimeClass from './animeclass'
+import Grapher from './graph';
 
 export default class ViewController {
 

@@ -20,11 +20,11 @@
     </div>
 
     <div class="container" id="home">
-     <h1 id="header">Learn anything now.</h1>
-     <div class="searchbar">
-        <input placeholder="Enter a subject..."/>
+      <h1 id="header">Learn anything now.</h1>
+      <form class="searchbar" onsubmit="window.controller.graph(this.query.value); return false">
         <span class="fas fa-search"></span> 
-      </div>
+        <input placeholder="Enter a subject..." name="query" />
+      </form>
     </div>
 
     <div class="container" id="graphview">

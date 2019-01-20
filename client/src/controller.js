@@ -1,20 +1,32 @@
 import AnimeClass from './animeclass'
 
 export default class ViewController {
-  constructor() {
-    this.animeclass = new AnimeClass()
+
+  #logic = null;
+  #animeclass = new AnimeClass();
+
+  constructor(logic) {
+    this.#logic = logic;
   }
   
-  home() {
+  async home() {
     this.switchviewelement('home')
   }
 
-  graph(searchterm) {
+  async graph(searchterm) {
+    const stuff = await this.#logic.graphMapped(searchterm);
+    const grapher = new Grapher(stuff);
+    grapher.construct_graph().then((name) => {
+      this.summary(name);
+    });
+
     document.querySelector('#searchterm').innerHTML = this.sanitizeHTML(searchterm)
     this.switchviewelement('graphview')
   }
 
-  summary(searchterm) {
+  async summary(name) {
+    const cards = await this.#logic.cards(name);
+
     document.querySelector('#summarytitle').innerHTML = this.sanitizeHTML(searchterm)
     this.switchviewelement('summaryview')
   }
@@ -35,9 +47,9 @@ export default class ViewController {
     console.log(id2)
     
     if(id2 === '')
-      this.animeclass.animate_in(id1)
+      this.#animeclass.animate_in(id1)
     else 
-      this.animeclass.animate_between(id1, id2)
+      this.#animeclass.animate_between(id1, id2)
   }
 
   sanitizeHTML(str) {
@@ -46,3 +58,5 @@ export default class ViewController {
 	  return temp.innerHTML;
   }
 }
+
+// vim: ts=2:ss=2:sw=2:et

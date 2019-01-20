@@ -59,7 +59,7 @@ export default class Logic {
         //if (Array.isArray(weight)) weight = weight.reduce((a, b) => a + b);
         if (up) edges.push({ source: up, target: o.uid, value: weight });
         return [
-          { id: o.uid, title: o['title@en']},
+          { id: o.uid, title: o['title@en'], name: o.name},
           ...recurse(o.link, o.uid),
         ];
       });

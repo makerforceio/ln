@@ -9,17 +9,12 @@ document.addEventListener("DOMContentLoaded", async (event) => {
   console.log("Pew everything is loaded")
   
   const logic = new Logic();
-
-  const controller = new ViewController()
-  controller.home()
-
-  window.logic = logic;
-  const stuff = await logic.graphMapped("Cryptocurrency");
-  let grapher = new Grapher(stuff);
+  window._logic = logic;
   
-  grapher.construct_graph().then(function(d) {
-    console.log(d)
-  })
+  const controller = new ViewController(logic)
+  controller.home()
+  window.controller = controller;
+
 })
 
 window.Logic = Logic;

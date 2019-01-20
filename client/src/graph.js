@@ -96,7 +96,7 @@ export default class Grapher {
       }
 
       function onclick(d) {
-        resolve(d.id)
+        resolve(d.name)
       }
     })
   }  

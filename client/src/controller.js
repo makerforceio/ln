@@ -30,11 +30,27 @@ export default class ViewController {
     console.log(cards);
 
     const html = cards.map(c => `
-      <div class="card card-2w">
-        <h1>${c.title}</h1>
-        <!-- <span class="badge">wikipedia.com</span> -->
-        <!-- <span class="badge">summary</span> -->
-        <p id="cardtext">${c.content}</p>
+      <div class="card"
+        ${c.type == 'image' ? `style="background: url('${c.image}'); background-size: cover;"` : ''}
+        >
+        ${do {
+          if (c.type == 'image') {
+            ``;
+          } else if (c.type == 'paragraph') {
+            `
+              <h1>${c.title}</h1>
+              <!-- <span class="badge">wikipedia.com</span> -->
+              <!-- <span class="badge">summary</span> -->
+              <p id="cardtext">${c.content}</p>
+            `;
+          } else if (c.type == 'link') {
+            `
+
+            `;
+          } else {
+            ``;
+          }
+        }}
       </div>
     `).join('');
 

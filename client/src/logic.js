@@ -22,6 +22,11 @@ export default class Logic {
   }
 
   async search(query) {
+    return (await fetch('/search?query=' + encodeURIComponent(query))).json();
+  }
+  
+  async cards(name) {
+    return (await fetch('/cards?name=' + encodeURIComponent(name))).json();
   }
 
   async graph(name) {
@@ -49,7 +54,10 @@ export default class Logic {
       if (!a) return [];
       return a.flatMap((o) => {
         if (!o.uid) return [];
-        if (up) edges.push({ source: up, target: o.uid, value: '1' });
+        let weight = o['link|weight'];
+        console.log(weight);
+        //if (Array.isArray(weight)) weight = weight.reduce((a, b) => a + b);
+        if (up) edges.push({ source: up, target: o.uid, value: weight });
         return [
           { id: o.uid, title: o['title@en']},
           ...recurse(o.link, o.uid),

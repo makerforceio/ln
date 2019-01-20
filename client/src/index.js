@@ -7,10 +7,12 @@ import ViewController from './controller';
 
 document.addEventListener("DOMContentLoaded", async (event) => {
   console.log("Pew everything is loaded")
-  let controller = new ViewController()
+  
+  const logic = new Logic();
+
+  const controller = new ViewController()
   controller.home()
 
-  const logic = new Logic();
   window.logic = logic;
   const stuff = await logic.graphMapped("Cryptocurrency");
   let grapher = new Grapher(stuff);

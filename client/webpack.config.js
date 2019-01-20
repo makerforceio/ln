@@ -36,6 +36,10 @@ module.exports = {
 		hot: true,
 		progress: true,
 		port: 8081,
+		proxy: {
+			'/search': 'http://localhost:8082',
+			'/cards': 'http://localhost:8082',
+		},
 	},
 };
 

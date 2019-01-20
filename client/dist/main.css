@@ -126,6 +126,10 @@ h1 {
   height: 100%;
 }
 
+.searchbar .fas {
+  padding-right: 15px;
+}
+
 ::-webkit-input-placeholder {
   color: white;
 }

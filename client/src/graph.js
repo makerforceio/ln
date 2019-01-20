@@ -16,7 +16,7 @@ export default class Grapher {
         .range(['#000000', '#FFFFFF'])
 
       let simulation = d3.forceSimulation()
-          .force('link', d3.forceLink().id(function(d) { return d.id }).distance([200]))
+          .force('link', d3.forceLink().id(function(d) { return d.id }).distance(() => { return (100 + Math.random()*230)}))
           .force('charge', d3.forceManyBody())
           .force('center', d3.forceCenter(width / 2, height / 2))
       

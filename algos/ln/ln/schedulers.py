@@ -12,6 +12,8 @@ logger = logging.getLogger(__name__)
 import numpy as np
 from numpy.random import choice
 
+import time
+
 class ProximityScheduler(object):
 
     def __init__(self, dupefilter, jobdir=None, dqclass=None, mqclass=None,
@@ -52,17 +54,20 @@ class ProximityScheduler(object):
         if len(self.proximity_graph) == 0:
             self.start_key = request.url
         if request.headers.get(b'Referer') is not None:
-            referer = request.headers.get(b'Referer').decode()
+            referer = request.headers.get(b'Referer').decode('ASCII')
             if self.proximity_graph[referer] == -1:
                 self.proximity_graph[referer] = {}
             self.proximity_graph[referer][request.url] = self.proximity_graph[referer].get(request.url, 0) + request.meta["weight"]
         if self.proximity_graph.get(request.url) is None:
             self.requests[request.url] = request
             self.proximity_graph[request.url] = -2
+        else:
+            return False
         self.stats.inc_value('scheduler/enqueued', spider=self.spider)
         return True
 
     def next_request(self):
+        time.sleep(1)
         if len(self) <= 0:
             return
         parent_key = None
@@ -75,7 +80,10 @@ class ProximityScheduler(object):
                 del self.requests[key]
                 return request
             elif request_list == -1:
-                return
+                if parent_key is not None:
+                    key = parent_key
+                else:
+                    return
             elif sum(request_list.values()) == 0:
                 self.proximity_graph[parent_key][key] = 0
                 return

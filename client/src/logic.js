@@ -1,8 +1,7 @@
 import { DgraphClientStub, DgraphClient } from 'dgraph-js-http';
 
-const ENDPOINT = `${window.location.protocol}//${window.location.hostname}:8080`;
-
-const SEARCH_URL = `https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=`
+//const ENDPOINT = `${window.location.protocol}//${window.location.hostname}:8080`;
+const ENDPOINT = `https://dgraph.boopvoice.app/`;
 
 export default class Logic {
 

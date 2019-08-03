@@ -1,5 +1,9 @@
 version: "3.7"
 
+networks:
+  http_network:
+    external: true
+
 services:
   zero:
     image: dgraph/dgraph:latest
@@ -12,6 +16,8 @@ services:
       - 127.0.0.1:6080:6080
     restart: on-failure
     command: dgraph zero --my=zero:5080
+    networks:
+      - http_network
   server:
     image: dgraph/dgraph:latest
     volumes:
@@ -23,6 +29,13 @@ services:
       - 127.0.0.1:9080:9080
     restart: on-failure
     command: dgraph alpha --my=server:7080 --lru_mb=2048 --zero=zero:5080
+    networks:
+      - http_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.frontend.rule=Host:dgraph.boopvoice.app"
+      - "traefik.port=8080"
+      - "traefik.docker.network=http_network"
   ratel:
     image: dgraph/dgraph:latest
     volumes:
@@ -32,4 +45,30 @@ services:
     ports:
       - 127.0.0.1:8000:8000
     command: dgraph-ratel
+    networks:
+      - http_network
 
+  client:
+    image: productionwentdown/caddy
+    volumes:
+      - ./client/dist:/srv
+    networks:
+      - http_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.frontend.rule=Host:boopvoice.app"
+      - "traefik.port=2015"
+      - "traefik.docker.network=http_network"
+  proxy:
+    image: node
+    command: yarn start
+    volumes:
+      - ./proxy:/src
+    working_dir: /src
+    networks:
+      - http_network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.frontend.rule=Host:boopvoice.app;Path:/search,/cards"
+      - "traefik.port=8082"
+      - "traefik.docker.network=http_network"

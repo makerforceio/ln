@@ -21,7 +21,7 @@
 
     <div class="container" id="home">
       <h1 id="header">Learn anything now.</h1>
-      <form class="searchbar" onsubmit="window.controller.graph(this.query.value); return false">
+      <form class="searchbar" onsubmit="window.controller.graph(this.query.value, this.query.value); return false">
         <span class="fas fa-search"></span> 
         <input placeholder="Enter a subject..." name="query" oninput="window.controller.updateTopics(this.value)" />
       </form>
@@ -34,7 +34,7 @@
       </div>
       <h1>Prerequisites for:</h1>
       <h1 id="searchterm">Cryptography</h1>
-      <svg width="960" height="600"></svg>
+      <svg width="1440" height="800"></svg>
     </div>
 
     <div class="container" id="summaryview">
